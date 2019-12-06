@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { css } from 'glamor'
+import Amplify, { Analytics } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react'
+import aws_exports from './aws-exports';
 
 import Form from './components/Form'
 import Notes from './components/Notes'
 import logo from './logo.svg';
 import './App.css';
+
+Amplify.configure(aws_exports);
 
 class App extends Component {
   state = { notes: [], filter: 'none' }
@@ -106,5 +111,4 @@ const styles = {
         }
 }
 
-
-export default App;
+export default withAuthenticator(App, { includeGreetings: true })
